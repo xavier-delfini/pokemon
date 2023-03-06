@@ -1,0 +1,19 @@
+#TODO: Class pokémon
+#TODO: string Name
+#TODO: int PV=100
+#TODO: int Attack
+#TODO: int Défense=0
+#TODO: Bool Shiny
+
+#TODO: Class Type(pokémon)
+#Stats (Spécifique à la classe)
+#TODO:int PV
+#TODO:int Puissance d'attaque
+#TODO:int Défense
+
+#TODO:Class définissant un pokémon spécifique(Type)(nom a trouvé)
+#TODO:Nom
+
+
+
+
