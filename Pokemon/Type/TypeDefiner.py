@@ -4,10 +4,12 @@ sys.path.insert(0, '../')
 
 from Pokemon import Pokemon
 
+
 class TypeDefiner(Pokemon):
-    def __init__(self, name="missingNo", pv=100, attack=100, defense=0):
+    def __init__(self, name="missingNo", type=None, pv=100, attack=100, defense=0):
         Pokemon.__init__(self)
-        self.type = None
+        if type != None:
+            self.type = type
 
     def getType(self):
         return self.type
@@ -34,8 +36,7 @@ class TypeDefiner(Pokemon):
                 case _:
                     print("Ce type de Pokémon n'est pas valide")
                     return 1
-        Pokemon.setPV(self,PokeType.PV)
-        Pokemon.setAttack(self,PokeType.Attack)
-        Pokemon.setDefense(self,PokeType.Defense)
+        self.setPV(PokeType.PV)
+        self.setAttack(PokeType.Attack)
+        self.setDefense(PokeType.Defense)
         return "OK"
-
