@@ -41,7 +41,6 @@ class JsonPokemon:
         p = pokemoninfos.getPokemon(name)
 
         # Récupération des stats relatives au type du pokémon
-        sys.path.insert(0, 'Type/')
         from TypeDefiner import TypeDefiner
         Poke = TypeDefiner(name, p[1])
         Poke.setType(p[1])
@@ -65,7 +64,7 @@ class JsonPokemon:
         f.close()
 
 
-pokemon1 = JsonPokemon()
+#pokemon1 = JsonPokemon()
 #print(pokemon1.getPokemon("Rattata"))
 #pokemon1.createPokemon("Rattatac", "Normal")
-pokemon1.printPokemonInfos("Salameche")
+#pokemon1.printPokemonInfos("Salameche")
