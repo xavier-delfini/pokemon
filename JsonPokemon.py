@@ -12,14 +12,16 @@ def fetch_PokeBase():
 
 class JsonPokemon:
 
-    def createPokemon(self, name, type):
+    def createPokemon(self, name, pokemontype):
         from TypeDefiner import TypeDefiner
-        NewPoke =TypeDefiner()
-        if NewPoke.setType(type) == "OK" and self.verif_database(name) == 1:
-            self.addToPokebase([name, type])
+        NewPoke = TypeDefiner()
+        if NewPoke.setType(pokemontype) == "OK" and self.verif_database(name) == 1:
+            self.addToPokebase([name,pokemontype])
             print("Le pokémon " + name + " à été créer avec succès")
         else:
             print("Veuillez vérifier que le pokémon possède un type valide ou n'existe pas déjà dans la base de donnée")
+
+    # def getallPokemon(self):
 
     def getPokemon(self, name):
         pokedatabase = fetch_PokeBase()
@@ -58,13 +60,14 @@ class JsonPokemon:
     def addToPokebase(self, pokemon):  # pokemon étant un array avec le nom + type
         pokebase = fetch_PokeBase()
         pokebase[0].append(pokemon)
+        pokebase[1].append([pokemon[0], 0])
         json_value = json.dumps(pokebase)
         f = open("pokemon.json", "w")
         f.write(json_value)
         f.close()
 
 
-#pokemon1 = JsonPokemon()
-#print(pokemon1.getPokemon("Rattata"))
-#pokemon1.createPokemon("Rattatac", "Normal")
-#pokemon1.printPokemonInfos("Salameche")
+pokemon1 = JsonPokemon()
+# print(pokemon1.getPokemon("Rattata"))
+#pokemon1.createPokemon("Keunotor", "Normal")
+# pokemon1.printPokemonInfos("Salameche")

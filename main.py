@@ -1,14 +1,15 @@
-#TODO: Class pokémon
-#TODO: string Name
-#TODO: int PV=100
-#TODO: int Attack
-#TODO: int Défense=0
-#TODO: Bool Shiny
+from JsonPokemon import JsonPokemon
+while True:
+    question=input("Bienvenue que souhaitez-vous faire ?,(N=Nouvelle partie,A=Ajouter un nouveau pokémon,P=Pokédex")
+    match question:
+        case "N":
 
-
-#TODO:Class définissant un pokémon spécifique(Type)(nom a trouvé)
-#TODO:Nom
-
+        case "A":
+        case "P":
 
 
 
+Poke=JsonPokemon()
+Poke.verif_database(pokemon_name)
+
+def launch_game(pokemon_name):
