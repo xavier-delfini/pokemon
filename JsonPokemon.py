@@ -111,10 +111,3 @@ class JsonPokemon:
         f = open("pokemon.json", "w")
         f.write(json_value)
         f.close()
-
-
-pokemon1 = JsonPokemon()
-# print(pokemon1.getPokemon("Rattata"))
-# pokemon1.createPokemon("Keunotor", "Normal")
-# pokemon1.printPokemonInfos("Salameche")
-pokemon1.printDiscoveredPokemon()

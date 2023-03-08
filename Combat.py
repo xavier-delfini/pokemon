@@ -110,7 +110,3 @@ class Combat:
             return 1
         else:
             return 0
-
-
-#fight = Combat("Rattatac", "Salameche")
-#fight.Game()
