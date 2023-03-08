@@ -90,6 +90,7 @@ class Combat:
             time.sleep(3)
             if self.IsKO(defender[2]) == 1:
                 print("Le pokémon " + defender[0] + " est KO, victoire de " + attacker[0])
+
                 break
 
     def __calculateDamage(self, AttackerAttack, AttackerAffinity, DefenderDefense):
@@ -111,5 +112,5 @@ class Combat:
             return 0
 
 
-fight = Combat("Rattatac", "Salameche")
-fight.Game()
+#fight = Combat("Rattatac", "Salameche")
+#fight.Game()

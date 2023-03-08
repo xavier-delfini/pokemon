@@ -7,6 +7,7 @@ class Pokemon:
 
     def getName(self):
         return self.__name
+
     def setName(self, newName):
         self.__name = newName
 

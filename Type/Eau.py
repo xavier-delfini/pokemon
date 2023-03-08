@@ -1,3 +1,3 @@
 PV=200
-Attack=49
+Attack=40
 Defense=10

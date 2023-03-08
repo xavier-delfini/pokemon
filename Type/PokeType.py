@@ -1,0 +1,1 @@
+types=["Eau","Feu","Plante","Normal"]
