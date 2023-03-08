@@ -6,8 +6,8 @@ class Combat:
 
     def Game(self,firstpokemon,secondpokemon):
         import sys
-        sys.path.insert(0,"../Combat/Pokemon")
-        from ..Pokemon import JsonPokemon
+        sys.path.append('../Pokemon/')
+        import JsonPokemon
         FirstPokemon=JsonPokemon()
         SecondPokemon=JsonPokemon()
         print(FirstPokemon.getPokemon(firstpokemon))

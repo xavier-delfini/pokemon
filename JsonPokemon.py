@@ -13,10 +13,8 @@ def fetch_PokeBase():
 class JsonPokemon:
 
     def createPokemon(self, name, type):
-        sys.path.insert(0, 'Type/')
-        import importlib
-        module = importlib.import_module('Type.TypeDefiner')
-        NewPoke = module.TypeDefiner()
+        from TypeDefiner import TypeDefiner
+        NewPoke =TypeDefiner()
         if NewPoke.setType(type) == "OK" and self.verif_database(name) == 1:
             self.addToPokebase([name, type])
             print("Le pokémon " + name + " à été créer avec succès")
@@ -44,9 +42,8 @@ class JsonPokemon:
 
         # Récupération des stats relatives au type du pokémon
         sys.path.insert(0, 'Type/')
-        import importlib
-        module = importlib.import_module('Type.TypeDefiner')
-        Poke = module.TypeDefiner(name, p[1])
+        from TypeDefiner import TypeDefiner
+        Poke = TypeDefiner(name, p[1])
         Poke.setType(p[1])
         Poke.setName(name)
         return [Poke.getName(), Poke.getType(), Poke.getPV(), Poke.getAttack(), Poke.getDefense()]
