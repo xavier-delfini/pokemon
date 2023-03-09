@@ -69,15 +69,17 @@ class Combat:
             time.sleep(1)
             if self.__HitOrNot():
                 damages = int(self.__calculateDamage(attacker[3], attacker[5], defender[4]))
-
-                if attacker[5] == 2:
-                    efficacity = "C'est super efficace ,"
-                elif attacker[5] == 0.5:
-                    efficacity = "Ce n'est pas très efficace ,"
+                if attacker[5] == 0:
+                    print("ça n'affecte pas "+defender[0]+" ennemis")
                 else:
-                    efficacity = ""
-                print(efficacity + "le " + defender[0] + " ennemis subit " + str(damages) + " points de dégats")
-                defender[2] = defender[2] - damages
+                    if attacker[5] == 2:
+                        efficacity = "C'est super efficace ,"
+                    elif attacker[5] == 0.5:
+                        efficacity = "Ce n'est pas très efficace ,"
+                    else:
+                        efficacity = ""
+                    print(efficacity + "le " + defender[0] + " ennemis subit " + str(damages) + " points de dégats")
+                    defender[2] = defender[2] - damages
             else:
                 print(attacker[0] + " a raté son attaque")
             time.sleep(1)
