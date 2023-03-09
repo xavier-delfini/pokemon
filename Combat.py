@@ -106,3 +106,6 @@ class Combat:
             return 1
         else:
             return 0
+
+#Pokemon1=Combat("Pikachu","Gobu")
+#Pokemon1.Game()

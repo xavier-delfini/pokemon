@@ -1,8 +1,9 @@
-affinity = [[1, 2, 0.5, 1],         # 0=Eau
-            [0.5, 1, 2, 1],         # 1=Feu
-            [2, 0.5, 1, 1],         # 2=Plante
-            [0.75, 0.75, 0.75, 1]]  # 3=Normal
-
+affinity = [[1, 2, 0.5, 1,0.5],         # 0=Eau
+            [0.5, 1, 2, 1,1],         # 1=Feu
+            [2, 0.5, 1, 1,1],         # 2=Plante
+            [0.75, 0.75, 0.75, 1,0.75],  # 3=Normal
+            [2,1,1,1,1]               # 4=Foudre
+            ]
 #Carapuce vs Salamèche
 #Carapuce[0,1]
 #Salamèche[1,0]
