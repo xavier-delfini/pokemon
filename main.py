@@ -7,13 +7,13 @@ def IASelectPokemon():
     print("L'adversaire choisi "+IAPokemon)
     return IAPokemon
 while True:
-    question = input("Bienvenue que souhaitez-vous faire ?(N=Nouvelle partie,A=Ajouter un nouveau pokémon,P=Pokédex")
+    question = input("Bienvenue que souhaitez-vous faire ?(N=Nouvelle partie,A=Ajouter un nouveau pokémon,P=Pokéde) :")
     Poke = JsonPokemon()
     match question:
         case "N":
             Poke.printAllPokemon()
             while True:
-                selectedPokemon = input("Veuillez selectionné un pokémon parmis la liste ci-dessus :")
+                selectedPokemon = input("Veuillez selectionné un Pokémon parmi la liste ci-dessus :")
                 if selectedPokemon in Poke.getAllPokemon():
                     print("Vous choisissez "+selectedPokemon)
                     time.sleep(1)
@@ -28,7 +28,7 @@ while True:
             nom = str(input("Veuillez entrer le nouveau nom de votre pokémon :"))
             while True:
                 Poke.printAllType()
-                type = input("Veuillez entrer le nom de votre pokémon parmis les types ci dessus :")
+                type = input("Veuillez entrer le type de votre pokémon parmis les types ci dessus :")
                 if type in Poke.getAllType():
                     break
             Poke.createPokemon(nom, type)
@@ -40,7 +40,3 @@ while True:
                 if Selectionnedpokemon in Poke.getDiscoveredPokemon():
                     Poke.printPokemonInfos(Selectionnedpokemon)
                     break
-
-
-
-

@@ -1,7 +1,5 @@
 import json
 import sys
-
-
 def fetch_PokeBase():
     f = open("pokemon.json", "r")
     array = f.read()
@@ -17,7 +15,7 @@ class JsonPokemon:
         NewPoke = TypeDefiner()
         if NewPoke.setType(pokemontype) == "OK" and self.verif_database(name) == 1:
             self.addToPokebase([name, pokemontype])
-            print("Le pokémon " + name + " à été créer avec succès")
+            print("Le pokémon " + name + " a été créer avec succès")
         else:
             print("Veuillez vérifier que le pokémon possède un type valide ou n'existe pas déjà dans la base de donnée")
 

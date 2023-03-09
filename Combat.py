@@ -19,28 +19,24 @@ class Combat:
         return array.affinity[x][y]
 
     def __GetAffinity(self, currentPokemonType, vsPokemonType):
+        from Type import PokeType as arrayType
         pokemonType = [currentPokemonType, vsPokemonType]
         Affinity = []
         # 0=Eau
         # 1=Feu
         # 2=Plante
         # 3=Normal
-        for type in pokemonType:
-            match type:
-                case "Normal":
-                    Affinity.append(3)
-                case "Eau":
-                    Affinity.append(0)
-                case "Feu":
-                    Affinity.append(1)
-                case "Plante":
-                    Affinity.append(2)
+        for Pokemontype in pokemonType:
+            i=0
+            for availableType in arrayType.types:
+                if availableType == Pokemontype:
+                    Affinity.append(i)
+                i+=1
         return self.__CheckAffinityTable(Affinity[0], Affinity[1])
 
     def __ChooseStartingPokemon(self, pokemon1, pokemon2):
         import random
         start_order = random.random()
-        print(start_order)
         if 0.5 >= start_order:
             print("Vous commencer")
             return [pokemon1, pokemon2]

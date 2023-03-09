@@ -3,11 +3,7 @@ affinity = [[1, 2, 0.5, 1],         # 0=Eau
             [2, 0.5, 1, 1],         # 2=Plante
             [0.75, 0.75, 0.75, 1]]  # 3=Normal
 
-
-
-
-
-#Carapuce vs salamèche
+#Carapuce vs Salamèche
 #Carapuce[0,1]
 #Salamèche[1,0]
 #Carapuce attaque multiplié par 2 contre feu
