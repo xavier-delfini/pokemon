@@ -1,30 +1,31 @@
 class Pokemon:
-    def __init__(self, name="missingNo", PV=100, Attack=100, Defense=100):
-        self.__name = name
-        self.__PV = PV
-        self.__Attack = Attack
-        self.__Defense = Defense
+    def __init__(self, inputName="missingNo", inputPv=100, inputAttack=100, inputDefense=100):
+        self.__name = inputName
+        self.__PV = inputPv
+        self.__Attack = inputAttack
+        self.__Defense = inputDefense
 
-    def getName(self):
+#Get et Set des arguments ci dessus
+    def GetName(self):
         return self.__name
 
-    def setName(self, newName):
+    def SetName(self, newName):
         self.__name = newName
 
-    def getPV(self):
+    def GetPV(self):
         return self.__PV
 
-    def setPV(self, newPV):
+    def SetPV(self, newPV):
         self.__PV = newPV
 
-    def getAttack(self):
+    def GetAttack(self):
         return self.__Attack
 
-    def setAttack(self, newAttack):
+    def SetAttack(self, newAttack):
         self.__Attack = newAttack
 
-    def getDefense(self):
+    def GetDefense(self):
         return self.__Defense
 
-    def setDefense(self, newDefense):
+    def SetDefense(self, newDefense):
         self.__Defense = newDefense

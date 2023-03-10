@@ -1,110 +1,103 @@
 import random
-
-
+import constant as parameter
+from PokeDatabase import PokeDatabase
+import time
 class Combat:
-    def __init__(self, playerPokemon, AIPokemon):
-        self.firstPokemon, self.secondPokemon = self.PrepareForFight(playerPokemon, AIPokemon)
+    def __init__(self, playerPokemonName, computerPokemonName):
+        self.firstPokemon, self.secondPokemon = self.__PrepareForFight(playerPokemonName, computerPokemonName)
 
-    def PrepareForFight(self, playerPokemon, AIPokemon):
-        startingorder = self.__ChooseStartingPokemon(playerPokemon, AIPokemon)
-        firstPokemon, secondPokemon = self.__setPokemonStats(startingorder[0], startingorder[1])
-        Poke1Affinity = self.__GetAffinity(firstPokemon[1], secondPokemon[1])
-        Poke2Affinity = self.__GetAffinity(secondPokemon[1], firstPokemon[1])  # Inversion de l'affinité
-        firstPokemon.append(Poke1Affinity)
-        secondPokemon.append(Poke2Affinity)
+    def __PrepareForFight(self, playerPokemonName, computerPokemonName):
+        startingOrder = self.__ChooseStartingPokemon(playerPokemonName, computerPokemonName)
+        firstPokemon, secondPokemon = self.__SetPokemonStats(startingOrder[0], startingOrder[1])
+        poke1Affinity = self.__GetAffinity(firstPokemon[1], secondPokemon[1])
+        poke2Affinity = self.__GetAffinity(secondPokemon[1], firstPokemon[1])
+        firstPokemon.append(poke1Affinity)  # Ajout de l'affinité du pokémon a la liste des propriété du Pokémon
+        secondPokemon.append(poke2Affinity)
         return firstPokemon, secondPokemon
 
     def __CheckAffinityTable(self, x, y):
-        from CombatParameters import affinitytable as array
-        return array.affinity[x][y]
+        return parameter.AFFINITY_ARRAY[x][y]
 
-    def __GetAffinity(self, currentPokemonType, vsPokemonType):
-        from Type import PokeType as arrayType
-        pokemonType = [currentPokemonType, vsPokemonType]
-        Affinity = []
+    def __GetAffinity(self, selectedPokemonType, vsPokemonType):
+        combatingPokemonsType = [selectedPokemonType, vsPokemonType]
+        affinityLocation = []
         # 0=Eau
         # 1=Feu
         # 2=Plante
         # 3=Normal
-        for Pokemontype in pokemonType:
-            i=0
-            for availableType in arrayType.types:
-                if availableType == Pokemontype:
-                    Affinity.append(i)
-                i+=1
-        return self.__CheckAffinityTable(Affinity[0], Affinity[1])
+        for pokemonType in combatingPokemonsType:
+            i = 0
+            for availableType in parameter.TYPES_NAME_ARRAY:
+                if availableType == pokemonType:
+                    affinityLocation.append(i)
+                i += 1
+        return self.__CheckAffinityTable(affinityLocation[0], affinityLocation[1])
 
     def __ChooseStartingPokemon(self, pokemon1, pokemon2):
-        import random
-        start_order = random.random()
-        if 0.5 >= start_order:
+        startOrder = random.random()
+        if 0.5 >= startOrder:
             print("Vous commencer")
             return [pokemon1, pokemon2]
-        elif 0.5 < start_order:
+        elif 0.5 < startOrder:
             print("L'adversaire commence")
             return [pokemon2, pokemon1]
 
-    def __setPokemonStats(self, firstPoke, secondpoke):
-        from JsonPokemon import JsonPokemon
-        FirstPokemon = JsonPokemon()
-        SecondPokemon = JsonPokemon()
-        StatsPoke1 = FirstPokemon.getPokemonInfos(firstPoke)
-        StatsPoke2 = SecondPokemon.getPokemonInfos(secondpoke)
-
-        return StatsPoke1, StatsPoke2
+    def __SetPokemonStats(self, firstPokemonName, secondPokemonName):
+        firstPokemonObject = PokeDatabase()
+        secondPokemonObject = PokeDatabase()
+        StatsPokemon1 = firstPokemonObject.GetPokemonInfos(firstPokemonName)
+        StatsPokemon2 = secondPokemonObject.GetPokemonInfos(secondPokemonName)
+        return StatsPokemon1, StatsPokemon2
 
     def Game(self):
-        import time
-        FirstPokemonTurn = True
+        isStartingPokemonTurn = 1
         while True:
-            if FirstPokemonTurn == 1:
-                attacker = self.firstPokemon
-                defender = self.secondPokemon
-                FirstPokemonTurn = 0
+            if isStartingPokemonTurn == 1:
+                pokemonAttacking = self.firstPokemon
+                pokemonDefending = self.secondPokemon
+                isStartingPokemonTurn = 0
             else:
-                attacker = self.secondPokemon
-                defender = self.firstPokemon
-                FirstPokemonTurn = 1
-            print("Au tour de " + attacker[0] + " d'attaquer")
+                pokemonAttacking = self.secondPokemon
+                pokemonDefending = self.firstPokemon
+                isStartingPokemonTurn = 1
+            print("Au tour de " + pokemonAttacking[0] + " d'attaquer")
             time.sleep(1)
             if self.__HitOrNot():
-                damages = int(self.__calculateDamage(attacker[3], attacker[5], defender[4]))
-                if attacker[5] == 0:
-                    print("ça n'affecte pas "+defender[0]+" ennemis")
+                dealtDamages = int(self.__CalculateDamage(pokemonAttacking[3], pokemonAttacking[5], pokemonDefending[4]))
+                if pokemonAttacking[5] == 0:
+                    print("ça n'affecte pas " + pokemonDefending[0] + " ennemis")
                 else:
-                    if attacker[5] == 2:
-                        efficacity = "C'est super efficace ,"
-                    elif attacker[5] == 0.5:
-                        efficacity = "Ce n'est pas très efficace ,"
+                    if pokemonAttacking[5] == 2:
+                        printAttackAfficacity = "C'est super efficace ,"
+                    elif pokemonAttacking[5] == 0.5:
+                        printAttackAfficacity = "Ce n'est pas très efficace ,"
                     else:
-                        efficacity = ""
-                    print(efficacity + "le " + defender[0] + " ennemis subit " + str(damages) + " points de dégats")
-                    defender[2] = defender[2] - damages
+                        printAttackAfficacity = ""
+                    print(printAttackAfficacity + "le " + pokemonDefending[0] + " ennemis subit " + str(
+                        dealtDamages) + " points de dégats")
+                    pokemonDefending[2] = pokemonDefending[2] - dealtDamages
             else:
-                print(attacker[0] + " a raté son attaque")
+                print(pokemonAttacking[0] + " a raté son attaque")
             time.sleep(1)
-            print(attacker[0] + ": " + str(attacker[2]) + " PV")
-            print(defender[0] + ": " + str(defender[2]) + " PV")
+            print(pokemonAttacking[0] + ": " + str(pokemonAttacking[2]) + " PV")
+            print(pokemonDefending[0] + ": " + str(pokemonDefending[2]) + " PV")
             time.sleep(3)
-            if self.IsKO(defender[2]) == 1:
-                print("Le pokémon " + defender[0] + " est KO, victoire de " + attacker[0])
-
+            if self.__IsKO(pokemonDefending[2]) == 1:
+                print("Le pokémon " + pokemonDefending[0] + " est KO, victoire de " + pokemonAttacking[0])
                 break
 
-    def __calculateDamage(self, AttackerAttack, AttackerAffinity, DefenderDefense):
-        return (AttackerAttack - DefenderDefense) * AttackerAffinity
+    def __CalculateDamage(self, attackerAttack, attackerAffinity, defenderDefense):
+        return (attackerAttack - defenderDefense) * attackerAffinity
 
-    def IsKO(self, pokemon_defender_health):
-        if pokemon_defender_health <= 0:
+    def __IsKO(self, pokemonDefencerHealth):
+        if pokemonDefencerHealth <= 0:
             return 1
         else:
             return 0
 
     def __HitOrNot(self):
-        import random
         roll = random.random()
-        from CombatParameters import hitchance as hit
-        if roll < hit.hit:
+        if roll < parameter.HIT_CHANCE:
             return 1
         else:
             return 0
